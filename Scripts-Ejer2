@@ -1,0 +1,47 @@
+script1
+#!/bin/bash
+grep "Listen $1" /etc/apache2/ports.conf
+if [ $? -eq 0 ]
+then
+  echo "Puerto existente"
+else
+  echo "Listen $1" >> /etc/apache2/ports.conf
+fi
+
+
+
+
+Script2
+#!/bin/bash
+grep -q -w "$1" /etc/hosts
+if [ $? -eq 0 ]
+then
+  echo "El dominio ya existe"
+else
+  echo "$2 $1" >> /etc/hosts
+echo "Dominio añadido exitosamente"
+fi
+
+
+
+
+Script3
+#!/bin/bash
+echo "<!DOCTYPE html>
+<html lang=en>
+<head>
+        <meta charset=UTF-8>
+        <meta http-equiv=X-UA-Compatible content=IE=edge>
+        <meta name=viewport content=width=device-width, initial-scale=1.0>
+        <title>Nueva web $1</title>
+</head>
+
+<body>
+        <h1>Título de la nueva página</h1>
+<header>
+        <p><b>Ejemplo de cabecera</b></p>
+</header>
+        <p>Parrafo de contenido de la pagina</p>
+</body>
+</html>" > /var/www/html/$1.html
+echo "La web $1 ha sido creada exitosamente"
